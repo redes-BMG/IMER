@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Códigos QR - ALPLA</title>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; margin: 40px; }
+    .qr { display: inline-block; margin: 20px; border: 1px solid #ccc; padding: 15px; border-radius: 10px; }
+    canvas { margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Códigos QR de las páginas del proyecto ALPLA</h1>
+  <div id="qrs"></div>
+
+  <script>
+    // URL base de tu sitio en GitHub Pages
+    const base = "https://redes-bmg.github.io/ALPLA";
+
+    // Lista de páginas a generar QR
+    const paginas = [
+      { nombre: "Inicio", url: `${base}/ANAQUEL-CONTRA-INCENDIOS.html` },
+      // { nombre: "Contacto", url: `${base}/contacto.html` },
+      // { nombre: "Productos", url: `${base}/productos.html` }
+    ];
+
+    const contenedor = document.getElementById("qrs");
+
+    // Genera un QR para cada página
+    paginas.forEach(p => {
+      const div = document.createElement("div");
+      div.className = "qr";
+      div.innerHTML = `<h3>${p.nombre}</h3><canvas></canvas><p>${p.url}</p>`;
+      contenedor.appendChild(div);
+      QRCode.toCanvas(div.querySelector("canvas"), p.url);
+    });
+  </script>
+</body>
+</html>
